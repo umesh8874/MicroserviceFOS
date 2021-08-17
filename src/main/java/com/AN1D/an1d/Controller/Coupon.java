@@ -31,10 +31,15 @@ public class Coupon {
     }
 
     @RequestMapping(path = "/menu",produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.GET)
-    public String listAll(Model model) {
-        List<Menu> listUsers = mr.findAll();
-        model.addAttribute("listUsers", listUsers);
-        return "menu";
+    public List<Menu> listAll() {
+        List<Menu> menuUtems = mr.findAll();
+        return menuUtems;
+    }
+
+    @RequestMapping(path = "/countReferenceCodeApplied",produces = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.GET)
+    public int referenceCode() {
+        List<Menu> menuUtems = mr.findAll();
+        return 1;
     }
 
 
