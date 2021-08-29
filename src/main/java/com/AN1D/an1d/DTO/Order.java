@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  */
 @Entity
+@Table(name="orders")
 @NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -45,6 +46,10 @@ public class Order implements Serializable {
 	@Column(name="is_referral")
 	private byte isReferral;
 
+	@JsonProperty("referral_updated")
+	@Column(name="referral_updated")
+	private byte referralUpdated;
+
     @JsonProperty("transaction_status")
 	@Column(name="transaction_status")
 	private byte transactionStatus;
@@ -64,13 +69,14 @@ public class Order implements Serializable {
 	public Order() {
 	}
 
-	public Order(int id, double actualAmount, Timestamp createdAt, byte isReferral, double orderAmount,
+	public Order(int id, double actualAmount, Timestamp createdAt, byte isReferral, byte referralUpdated, double orderAmount,
             double orderDiscountAmt, int orderDiscountPerc, String orderId, byte shippingStatus, byte transactionStatus,
             Timestamp updatedAt, int userId) {
         this.id = id;
         this.actualAmount = actualAmount;
         this.createdAt = createdAt;
         this.isReferral = isReferral;
+		this.referralUpdated = referralUpdated;
         this.orderAmount = orderAmount;
         this.orderDiscountAmt = orderDiscountAmt;
         this.orderDiscountPerc = orderDiscountPerc;
@@ -111,6 +117,14 @@ public class Order implements Serializable {
 
 	public void setIsReferral(byte isReferral) {
 		this.isReferral = isReferral;
+	}
+
+	public byte getReferralUpdated() {
+		return referralUpdated;
+	}
+
+	public void setReferralUpdated(byte referralUpdated) {
+		this.referralUpdated = referralUpdated;
 	}
 
 	public double getOrderAmount() {

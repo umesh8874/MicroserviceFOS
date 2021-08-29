@@ -28,12 +28,12 @@ public class UserController {
     private RequestValidator requestValidator;
 
     @GetMapping(value = "get-user/{user_id}")
-    public ResponseEntity<Map<String, Object>> getUserInfo(@RequestParam(value = "access_token", required = true) 
-        String access_token, @RequestParam(value = "type", required = true) int type,
-        @PathVariable(value = "user_id", required = true) Integer user_id){
-
+    public ResponseEntity<Map<String, Object>> getUserInfo(
+        @RequestParam(value = "access_token", required = true) String access_token,
+        @RequestParam(value = "type", required = true) int type,
+        @PathVariable(value = "user_id", required = true) Integer user_id)
+    {
         requestValidator.tokenValidator(access_token, type);
-        
         return userService.getUser(user_id);
     }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import com.AN1D.an1d.DTO.UserInfo;
 import com.AN1D.an1d.DTO.UserReferral;
+import com.AN1D.an1d.Exceptions.AlreadyPresentException;
 import com.AN1D.an1d.Exceptions.BadRequestException;
 import com.AN1D.an1d.Exceptions.NotFoundException;
 import com.AN1D.an1d.Exceptions.UnAuthorisedException;
@@ -116,12 +117,12 @@ public class ReferralService {
     }
 
     public Map<String, Object> updateReferralValue(int user_id) {
-        int order_count = orderDao.findByUserId(user_id, 1, 1);
+        int order_count = orderDao.findByUserId(user_id, 1, 1, 0);
         if(order_count > 1)
             throw new BadRequestException("Not eligible to update referral!");
 
         UserReferral user_referral = userReferralDao.findByUserId(user_id);
-        if(user_referral != null){
+        if(user_referral != null && order_count == 1){
             String consumed_referral_code = user_referral.getConsumedReferralCode();
             UserReferral ex_user_referral = userReferralDao.findByReferralCode(consumed_referral_code);
 
@@ -139,8 +140,9 @@ public class ReferralService {
             }else{
                 throw new UnProcessableEntityException("No referred user found!");
             }
+        }else{
+            throw new AlreadyPresentException("Details already updated!");
         }
-        return null;
     }
 
     public void validateRequest(int user_id, String access_token) {
