@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @ControllerAdvice
 public class OrderIdUtil {
 
-    public static String createOrderId(int prev_order_suffix) {
+    public static String createOrderId(String last_order_id) {
         int order_suffix = 1;
+        int prev_order_suffix = Integer.parseInt(last_order_id.substring(last_order_id.length() - 4));
         String date = DateUtils.getFormattedDateInYYYYMMDD();
         Timestamp max_time_stamp = Timestamp.valueOf(date+" 23:59:59.999");
 
@@ -26,8 +27,13 @@ public class OrderIdUtil {
         }
         strbuild.append("-");
 
+
+        String last_order_month_to_date = last_order_id.substring(12, 16);
+        String current_order_month_to_date = strbuild.toString().substring(12, 16);
+
         Timestamp current_timestamp = DateUtils.getCurretDateAsTimeStamp();
-        if(current_timestamp.before(max_time_stamp)){
+
+        if(current_timestamp.before(max_time_stamp) && last_order_month_to_date.equals(current_order_month_to_date)){
             order_suffix = prev_order_suffix+1;
 
             strbuild.append(decimalFormat(order_suffix));
@@ -42,4 +48,5 @@ public class OrderIdUtil {
         DecimalFormat dformat = new DecimalFormat("0000");
         return dformat.format(val);
     }
+
 }
