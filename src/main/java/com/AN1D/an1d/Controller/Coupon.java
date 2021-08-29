@@ -1,4 +1,4 @@
-package com.AN1D.an1d.Controller;
+package com.AN1D.an1d.controller;
 
 import com.AN1D.an1d.DTO.CouponDTO;
 import com.AN1D.an1d.DTO.Menu;
