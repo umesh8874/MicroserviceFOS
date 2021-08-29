@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.AN1D.an1d.DTO.UserInfo;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,5 +24,8 @@ public interface UserInfoDao extends JpaRepository<UserInfo, Integer> {
 
     @Query(value="SELECT * FROM `user_info` WHERE mobile = :mobile AND deleted = 0;", nativeQuery = true)
     UserInfo findByMobile(@Param("mobile") String mobile);
+
+    @Query(value="SELECT *  FROM `user_info` where deleted = 0",nativeQuery = true)
+	List<UserInfo> findAll(PageRequest pageRequest);
 
 }

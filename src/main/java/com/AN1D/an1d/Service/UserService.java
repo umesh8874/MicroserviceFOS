@@ -1,4 +1,6 @@
 package com.AN1D.an1d.Service;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.AN1D.an1d.DTO.UserInfo;
 import com.AN1D.an1d.DTO.UserReferral;
@@ -11,6 +13,7 @@ import com.AN1D.an1d.Utils.Md5Util;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -146,5 +149,12 @@ public class UserService {
             if(mobile_number.length() != 10)
                 throw new UnProcessableEntityException("mobile number is not valid!");
         }
+    }
+
+    public Map<String, Object> findAllUsers(PageRequest page_request) {
+        Map<String, Object> users = new HashMap<String,Object>();
+		List<UserInfo> usersList = userInfoDao.findAll(page_request);
+		users.put("users", usersList);
+		return users;
     }
 }
