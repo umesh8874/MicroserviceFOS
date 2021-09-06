@@ -2,9 +2,9 @@ package com.AN1D.an1d.Utils;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import com.AN1D.an1d.config.Constants;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.stereotype.Component;
 
-@ControllerAdvice
+@Component
 public class OrderIdUtil {
 
     public static String createOrderId(String last_order_id) {

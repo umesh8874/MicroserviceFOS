@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@EnableJpaRepositories("com.AN1D.an1d.Repository")
 //@PropertySource(value = { "classpath:application.properties" })
 @Configuration
+@ComponentScan
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableJpaAuditing
