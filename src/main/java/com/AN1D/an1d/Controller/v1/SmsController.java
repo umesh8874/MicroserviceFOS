@@ -35,7 +35,7 @@ public class SmsController {
     RequestValidator requestValidator;
 
     @PostMapping(value = "send-sms")
-    public void sendSms(@RequestParam(value = "access-token", required = true) String access_token,
+    public void sendSms(@RequestParam(value = "access_token", required = true) String access_token,
         @Valid @RequestBody Sms smsRequest) 
     {
         requestValidator.admin_token_validate(access_token);
@@ -43,7 +43,7 @@ public class SmsController {
     }
 
     @GetMapping(value = "get-send-sms-logs")
-    public Page<SmsLog> sendSms(@RequestParam(value = "access-token", required = true) String access_token,
+    public Page<SmsLog> sendSms(@RequestParam(value = "access_token", required = true) String access_token,
         @RequestParam(value = "offset", defaultValue = "0", required = true) int offset,
         @RequestParam(value = "limit", defaultValue = "20", required = true) int limit)
     
@@ -54,7 +54,7 @@ public class SmsController {
     }
 
     @PostMapping(value = "send-bulk-sms")
-    public ResponseEntity<Object> sendBulkSms(@RequestParam(value = "access-token", required = true) String access_token,
+    public ResponseEntity<Object> sendBulkSms(@RequestParam(value = "access_token", required = true) String access_token,
         @RequestParam(value = "message", required = true) String message)
     {
         requestValidator.admin_token_validate(access_token);
