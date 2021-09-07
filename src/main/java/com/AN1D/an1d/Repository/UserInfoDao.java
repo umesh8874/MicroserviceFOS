@@ -28,4 +28,7 @@ public interface UserInfoDao extends JpaRepository<UserInfo, Integer> {
     @Query(value="SELECT *  FROM `user_info` where deleted = 0",nativeQuery = true)
 	List<UserInfo> findAll(PageRequest pageRequest);
 
+    @Query(value="SELECT *  FROM `user_info` where deleted = 0",nativeQuery = true)
+    List<UserInfo> findAllNonDeleted();
+
 }

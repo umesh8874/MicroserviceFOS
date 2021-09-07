@@ -26,7 +26,7 @@ public class SmsServiceImpl implements SmsSender{
     private SmsLogRepository smsLogRepository;
 
     @Override
-    public void sendSms(Sms smsRequest) {
+    public void sendSms(int is_bulk, Sms smsRequest) {
         TwilioRestClient client = twilioInitializerl.twilioRestClient();
         PhoneNumber to_mobile_number = new PhoneNumber(smsRequest.getCountryCode()+smsRequest.getMobileNumber());
         PhoneNumber from_mobile_number = new PhoneNumber(twilioInitializerl.fromPhoneNumber());
@@ -51,7 +51,8 @@ public class SmsServiceImpl implements SmsSender{
             sms_log.setIsSent((byte) 0);
             sms_log.setFailureLog(e.getLocalizedMessage());
             smsLogRepository.save(sms_log);
-            throw new IllegalArgumentException("Argument not valid.");
+            if(is_bulk == 0)
+                throw new IllegalArgumentException("Argument not valid.");
         }
     }
 }

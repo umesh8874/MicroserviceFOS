@@ -28,6 +28,10 @@ public class UserInfo implements Serializable {
 	@Column(name="last_name")
 	private String lastName;
 
+	@JsonProperty("country_code")
+	@Column(name="country_code")
+    private String countryCode;
+
     @JsonProperty("mobile")
 	@Column(name="mobile")
     private String mobile;
@@ -63,11 +67,12 @@ public class UserInfo implements Serializable {
 	public UserInfo() {
 	}
 
-	public UserInfo(Integer userId, String firstName, String lastName, String mobile, String email, String password,
+	public UserInfo(Integer userId, String firstName, String lastName, String countryCode, String mobile, String email, String password,
 			String accessToken, String address, byte deleted, Timestamp createdAt, Timestamp updateAt) {
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.countryCode = countryCode;
 		this.mobile = mobile;
 		this.email = email;
 		this.password = password;
@@ -124,6 +129,14 @@ public class UserInfo implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 
 	public String getMobile() {

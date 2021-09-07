@@ -2,6 +2,7 @@ package com.AN1D.an1d;
 import org.springframework.boot.*;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.*;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableJpaAuditing
+@EnableAsync
 public class An1dApplication {
 
 	public static void main(String[] args) {

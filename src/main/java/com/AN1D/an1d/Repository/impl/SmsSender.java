@@ -3,6 +3,6 @@ import com.AN1D.an1d.DTO.Sms;
 
 public interface SmsSender {
     
-    void sendSms(Sms smsRequest);
+    void sendSms(int is_bulk, Sms smsRequest);
 
 }
