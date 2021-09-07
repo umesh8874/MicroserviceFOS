@@ -22,4 +22,10 @@ public class RequestValidator {
         if(user_detail == null || user_detail.getId() <= 0)
             throw new UnAuthorisedException("Bad Credentials!");
     }
+
+    public void admin_token_validate(String access_token){
+        Users user = usersDao.findByAccessToken(access_token);
+        if(user == null)
+            throw new UnAuthorisedException("Bad Credentials!");
+    }
 }
